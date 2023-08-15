@@ -1,0 +1,24 @@
+{
+  "name": "tw-poster",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "http": "^0.0.1-security",
+    "jsdom": "^22.1.0",
+    "path": "^0.12.7",
+    "puppeteer": "^21.0.3",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "sharp": "^0.32.4",
+    "twitter-api-v2": "^1.15.1"
+  }
+}
