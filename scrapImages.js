@@ -16,7 +16,7 @@ export default async function scrapImages(imagesCount) {
         const page = await browser.newPage();
         await page.goto('https://www.midjourney.com/showcase/recent/', {
             waitUntil: 'networkidle2',
-            timeout: 10000,
+            timeout: 100000,
         });
 
         const imagesInfo = await page.evaluate(() => {
@@ -81,6 +81,7 @@ export default async function scrapImages(imagesCount) {
 
     } catch (error) {
         console.log(error);
+        return null;
     } finally {
         browser.close();
     }

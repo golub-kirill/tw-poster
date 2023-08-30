@@ -6,21 +6,38 @@ export default async function createTwittetPost(accounts, imagesInfo) {
     for (let index = 0; index < accounts.length; index++) {
         const { appKey, appSecret, accessToken, accessSecret } =
             accounts[index];
-        const messageText =
-            `🔥RETWEET FOR CHAIN REACTION🔥` +
-            `\n` +
-            `#followback #follow4follow #followme #teamfollowback #autofollow #refollow` +
-            `\n` +
-            `${trimStringToLastComma(imagesInfo.description[index])}`;
 
-        function trimStringToLastComma(messageText) {
-            let index = messageText.lastIndexOf(' ');
-            if (index >= 70) {
-                index =-1;
-                return messageText.slice(0, index).trim();
-            }
-            return messageText.slice(0, index).trim();
-        }
+        const getMessageText = () => {
+            const messageHeader =
+                `🔥RETWEET FOR CHAIN REACTION🔥` +
+                `\n` +
+                `#followback #follow4follow #followme #teamfollowback #autofollow #refollow` +
+                `\n`;
+
+            const messageDescription = imagesInfo.description[index-1];
+
+            const indexOfLastSpace = (messageHeader + messageDescription).substring(0, 280).trim().lastIndexOf(' ');
+
+            return (messageHeader + messageDescription).trim().substring(0, indexOfLastSpace);
+        };
+        // const messageText =
+        //     `🔥RETWEET FOR CHAIN REACTION🔥` +
+        //     `\n` +
+        //     `#followback #follow4follow #followme #teamfollowback #autofollow #refollow` +
+        //     `\n` +
+        //     `${trimStringToLast(imagesInfo.description[index])}`;
+        //
+        //         function trimStringToLast(messageText) {
+        //             let index = messageText.lastIndexOf(' ');
+        //             while (index >= 160) {
+        //                 console.log('Last index: ' + index)
+        //                 const newIndex = messageText.slice(0, index-2).trim().lastIndexOf(' ');
+        //                 console.log('Trimmed, new last index: ' + newIndex)
+        //
+        //                 return messageText.slice(0, newIndex).trim()
+        //             }
+        //             return messageText.slice(0, index).trim();
+        //         }
 
         console.log(`Sending tweet to ${accounts[index].id}`);
 
@@ -40,7 +57,7 @@ export default async function createTwittetPost(accounts, imagesInfo) {
 
             await client.v2.tweetThread([
                 {
-                    text: messageText,
+                    text: getMessageText(),
                     media: { media_ids: [mediaId] },
                 },
             ]);
